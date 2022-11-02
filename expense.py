@@ -1,4 +1,9 @@
-from PyInquirer import prompt
+from PyInquirer import prompt, print_json
+
+import logging
+import csv
+
+Logger = logging.getLogger(__name__)
 
 expense_questions = [
     {
@@ -20,11 +25,17 @@ expense_questions = [
 ]
 
 
-
-def new_expense(*args):
+def new_expense(*args, csv_file="expense_report.csv"):
     infos = prompt(expense_questions)
-    # Writing the informations on external file might be a good idea ¯\_(ツ)_/¯
-    print("Expense Added !")
+
+    csv_columns = ['amount','label','spender']
+    with open(csv_file, 'a') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+        writer.writerow(infos)
+        csvfile.close()
+
+    Logger.debug(infos)
+    Logger.info("Expense Added !")
     return True
 
 

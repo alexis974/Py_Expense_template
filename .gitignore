@@ -1,2 +1,5 @@
 *.swp
 venv
+__pycache__
+expense_report.csv
+users.csv
