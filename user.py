@@ -1,6 +1,9 @@
 import csv
 
 from PyInquirer import prompt
+import logging
+
+Logger = logging.getLogger(__name__)
 
 user_questions = [
     {
@@ -21,5 +24,8 @@ def add_user():
         writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
         writer.writerow(infos)
         csvfile.close()
+
+    Logger.debug(infos)
+    Logger.info("Expense Added !")
 
     return
