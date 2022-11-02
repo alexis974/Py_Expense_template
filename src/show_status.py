@@ -15,8 +15,8 @@ def get_users_status(csv_users="users.csv"):
     Example:
     status = {
         "toto": {
-            "toto": 0,
-            "tata": 0,
+            "toto": 0, # Will be used for total amount (toto own 0 in total)
+            "tata": 0, # Toto owes 0 to tata
         },
         "tata": {
             "toto": 0,
@@ -55,30 +55,20 @@ def show_status(csv_expense_report="expense_report.csv", csv_users="users.csv"):
             spender = row[2]
             people_involved = row[3]
 
-            Logger.debug(f"Amount: {amount}")
-            Logger.debug(f"Label: {label}")
-            Logger.debug(f"Spender: {spender}")
-            Logger.debug(f"People involved: {people_involved}")
-
             user_concerned_by_purchase = convert_string_list_to_list(people_involved)
 
-            Logger.info(f"User concerned by purchase: {user_concerned_by_purchase}")
+            Logger.debug(f"User concerned by purchase: {user_concerned_by_purchase}")
 
             amount_per_user = float(amount) / len(user_concerned_by_purchase)
 
             for user in user_concerned_by_purchase:
                 if user == spender:
-                    for user in user_concerned_by_purchase:
-                        if user == spender:
-                            status[user][user] += amount
+                    for i in user_concerned_by_purchase:
+                        if i != user:  # Don't add the amount to the spender
+                            status[user][i] += amount_per_user
                 else:
                     status[user][spender] -= amount_per_user
-            Logger.info(f"Status: {status}")
-
-
 
         csvfile.close()
 
-    Logger.info(f"Status: {status}")
-
-    Logger.info("Status of the expense report:")
+    Logger.info(f"Summary: {status}")
