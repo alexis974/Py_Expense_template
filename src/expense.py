@@ -1,8 +1,8 @@
 import csv
 import logging
 
-from PyInquirer import prompt, Separator
 from examples import custom_style_2
+from PyInquirer import Separator, prompt
 
 Logger = logging.getLogger(__name__)
 

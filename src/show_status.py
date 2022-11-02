@@ -1,5 +1,4 @@
 import csv
-
 import logging
 
 Logger = logging.getLogger(__name__)
@@ -57,7 +56,6 @@ def pretty_print_status(status):
             if user != i:
                 if status[user][i] < 0:
                     Logger.info(f"{user} owes {status[user][i] * -1} to {i}")
-
 
 
 def show_status(csv_expense_report="expense_report.csv", csv_users="users.csv"):

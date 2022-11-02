@@ -10,8 +10,8 @@ from os.path import isfile as path_isfile
 from PyInquirer import prompt
 
 from src.expense import new_expense
-from src.user import add_user
 from src.show_status import show_status
+from src.user import add_user
 
 sys.path.insert(0, './src')
 
