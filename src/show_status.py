@@ -8,6 +8,18 @@ def convert_string_list_to_list(string_list: str):
     return string_list[1:-1].replace(' ', '').replace("'", '').split(',')
 
 
+def get_all_user(csv_users):
+    """
+    This function should return a list of all users
+    """
+    with open(csv_users, 'r') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=';')
+        users = [row['name'] for row in reader]
+        csvfile.close()
+
+    return users
+
+
 def get_users_status(csv_users="users.csv"):
     """
     This functioninit the status of each user
@@ -24,11 +36,7 @@ def get_users_status(csv_users="users.csv"):
         }
     }
     """
-    with open(csv_users, 'r') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=';')
-        users = [row['name'] for row in reader]
-        csvfile.close()
-
+    users = get_all_user(csv_users)
     status = {}
 
     for user in users:
@@ -37,6 +45,19 @@ def get_users_status(csv_users="users.csv"):
             status[user][i] = 0
 
     return status
+
+def pretty_print_status(status):
+    """
+    This function should print the status of the expense report
+    """
+    users = get_all_user("users.csv")
+
+    for user in users:
+        for i in users:
+            if user != i:
+                if status[user][i] < 0:
+                    Logger.info(f"{user} owes {status[user][i] * -1} to {i}")
+
 
 
 def show_status(csv_expense_report="expense_report.csv", csv_users="users.csv"):
@@ -71,4 +92,5 @@ def show_status(csv_expense_report="expense_report.csv", csv_users="users.csv"):
 
         csvfile.close()
 
-    Logger.info(f"Summary: {status}")
+    Logger.debug(f"Summary: {status}")
+    pretty_print_status(status)
