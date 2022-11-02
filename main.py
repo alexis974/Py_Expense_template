@@ -3,12 +3,17 @@
 
 import csv
 import logging
+import sys
+from os.path import exists as path_exists
+from os.path import isfile as path_isfile
 
 from examples import custom_style_2
 from PyInquirer import prompt
 
-from expense import expense_questions, new_expense
-from user import add_user, user_questions
+from src.expense import expense_questions, new_expense
+from src.user import add_user, user_questions
+
+sys.path.insert(0, './src')
 
 log_format = "[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(filename)s:%(lineno)d"
 logging.basicConfig(encoding='utf-8', format=log_format, level=logging.DEBUG)
@@ -28,7 +33,28 @@ def ask_option():
         add_user()
         ask_option()
 
+
+def init_csv(csv_expense_report="expense_report.csv", csv_users="users.csv"):
+    """
+    This function should create the csv files if they don't exist
+    """
+    if not (path_exists(csv_expense_report) and path_isfile(csv_expense_report)):
+        with open(csv_expense_report, 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=['amount','label','spender'])
+            writer.writeheader()
+            csvfile.close()
+
+    if not (path_exists(csv_users) and path_isfile(csv_users)):
+        with open(csv_users, 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=['name'])
+            writer.writeheader()
+            csvfile.close()
+
+
 def main():
+    init_csv()
     ask_option()
 
-main()
+
+if __name__ == "__main__":
+    main()

@@ -1,7 +1,7 @@
 import csv
+import logging
 
 from PyInquirer import prompt
-import logging
 
 Logger = logging.getLogger(__name__)
 
