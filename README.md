@@ -25,7 +25,7 @@ Creation of new files is recommended. Clean architectures will be rewarded
 
 - [X] A new expense can be added (Mandatory expense information : Amount, label, Spender)
 - [X] Expense registry is stored in an external file on an appropriate format for persistency (CSV is fine, any other relevant format would be cool)
-- [ ] A new user can be created (Mandatory user information : Name)
+- [X] A new user can be created (Mandatory user information : Name)
 - [ ] Users are stored in an external file for persistency
 - [ ] When adding a new expense, Spender should be chosen among existing users
 - [ ] An expense can be divided between several existing users. By default, total amount of the expense will be evenly split between all involved users and spender should automatically be checked as involved in the expense

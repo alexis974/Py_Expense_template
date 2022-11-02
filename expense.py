@@ -1,7 +1,7 @@
-from PyInquirer import prompt, print_json
-
-import logging
 import csv
+import logging
+
+from PyInquirer import print_json, prompt
 
 Logger = logging.getLogger(__name__)
 
@@ -37,5 +37,3 @@ def new_expense(*args, csv_file="expense_report.csv"):
     Logger.debug(infos)
     Logger.info("Expense Added !")
     return True
-
-
