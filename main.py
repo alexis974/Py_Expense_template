@@ -7,11 +7,10 @@ import sys
 from os.path import exists as path_exists
 from os.path import isfile as path_isfile
 
-from examples import custom_style_2
 from PyInquirer import prompt
 
-from src.expense import expense_questions, new_expense
-from src.user import add_user, user_questions
+from src.expense import new_expense
+from src.user import add_user
 
 sys.path.insert(0, './src')
 
@@ -40,7 +39,7 @@ def init_csv(csv_expense_report="expense_report.csv", csv_users="users.csv"):
     """
     if not (path_exists(csv_expense_report) and path_isfile(csv_expense_report)):
         with open(csv_expense_report, 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=['amount','label','spender'])
+            writer = csv.DictWriter(csvfile, fieldnames=['amount','label','spender', 'People_involved'])
             writer.writeheader()
             csvfile.close()
 
