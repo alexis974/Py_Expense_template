@@ -45,7 +45,7 @@ def get_questions_part_two(users: list, spender: str):
 
 def get_possible_spender(csv_users):
     with open(csv_users, 'r') as csvfile:
-        reader = csv.DictReader(csvfile)
+        reader = csv.DictReader(csvfile, delimiter=';')
         users = [row['name'] for row in reader]
         csvfile.close()
     return users
@@ -72,7 +72,7 @@ def new_expense(csv_expense_report="expense_report.csv", csv_users="users.csv"):
 
     csv_columns = ['amount','label','spender', 'People_involved']
     with open(csv_expense_report, 'a') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+        writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimiter=';')
         writer.writerow(infos_part_one)
         csvfile.close()
 

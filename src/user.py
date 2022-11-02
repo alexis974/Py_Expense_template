@@ -21,7 +21,7 @@ def add_user():
 
     csv_columns = ['name']
     with open('users.csv', 'a') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+        writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimiter=';')
         writer.writerow(infos)
         csvfile.close()
 
