@@ -16,7 +16,7 @@ from src.show_status import show_status
 sys.path.insert(0, './src')
 
 log_format = "[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(filename)s:%(lineno)d"
-logging.basicConfig(encoding='utf-8', format=log_format, level=logging.DEBUG)
+logging.basicConfig(encoding='utf-8', format=log_format, level=logging.INFO)
 
 Logger = logging.getLogger(__name__)
 
